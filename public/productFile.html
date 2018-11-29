@@ -1,0 +1,144 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="js/jquery-1.10.1.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="js/bootstrap.min.js"></script>
+   
+
+    <title>eCommerce Product Detail</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+
+  </head>
+
+  <body>
+
+  <!-- </body> onload="getPageData()"></body> -->
+	
+	<div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						
+						<div class="preview-pic tab-content">
+                          <div class="tab-pane active" id="pic-1"></div>
+						  <!-- <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div> -->
+						  <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
+						  <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
+						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
+						  <div class="tab-pane" id="pic-5"><img src="http://placekitten.com/400/252" /></div>
+						</div>
+						<!-- <ul class="preview-thumbnail nav nav-tabs">
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+						  <li><a data-target="#pic-2" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+						  <li><a data-target="#pic-3" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+						  <li><a data-target="#pic-5" data-toggle="tab"><img src="http://placekitten.com/200/126" /></a></li>
+						</ul> -->
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title" id="Ptitle"></h3>
+						<div class="rating">
+							<div class="stars">
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+							</div>
+							<span class="review-no">41 reviews</span>
+						</div>
+						<p class="product-description" id="Pdescription">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
+						<h4 class="price" id="Pprice">current price: <span>$180</span></h4>
+						<p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
+						<h5 class="sizes">sizes:
+							<!-- <span class="size" data-toggle="tooltip" title="small">s</span>
+							<span class="size" data-toggle="tooltip" title="medium">m</span>
+							<span class="size" data-toggle="tooltip" title="large">l</span>
+							<span class="size" data-toggle="tooltip" title="xtra large">xl</span> -->
+						</h5>
+						<h5 class="colors">colors:
+								<span id="PColour" ></span>
+							<!-- <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
+							<span class="color green"></span>
+							<span class="color blue"></span> -->
+						</h5>
+						<div class="action">
+							<button class="add-to-cart btn btn-default" type="button">add to cart</button>
+							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <script>
+
+		window.onload = getPageData();
+        function getPageData()
+        {
+			var queryString = window.location.search;
+			console.log(queryString);
+            var qString = queryString.substring(1);
+
+            var parameters = parseQueryString(queryString);
+			console.log(qString);
+			var pair = qString.split('=');
+			console.log(pair[1]);
+
+            $.ajax({url: "/product",
+                type: "get", //send it through get method
+                data: { 
+                    ID: pair[1], 
+                },
+                success: function(response) {
+					//Do Something
+					console.log(response);
+					var element = document.getElementById('pic-1'); // $("pics-1");
+					var img = document.createElement('img');
+					img.src= "NewPictUres/" + response.Details.Image;
+					element.appendChild(img);
+
+					document.getElementById('Pprice').innerHTML = response.Summary.Price;
+					document.getElementById('Pdescription').innerHTML = response.Details.Description;
+					document.getElementById('Ptitle').innerHTML = response.Summary.Title;
+					document.getElementById('PColour').innerHTML = response.Details.Color;
+                    console.log(response);
+                },
+                error: function(xhr) {
+					//Do Something to handle error
+					console.log("error at getpage data");
+                }
+                });
+            //var imageSource = parameters
+        }
+
+        function parseQueryString( queryString ) 
+        {
+            var params = {}, queries, temp, i, l;
+            // Split into key/value pairs
+            queries = queryString.split("&");
+            // Convert the array of strings into an object
+            for ( i = 0, l = queries.length; i < l; i++ ) {
+                temp = queries[i].split('=');
+                params[temp[0]] = temp[1];
+            }
+            return params;
+        }
+        
+    </script>
+</body>
+</html>

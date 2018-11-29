@@ -1,0 +1,74 @@
+{
+    "Question1" : 
+    {
+        "type" : "select",
+        "question" : "Title",
+        "visible" : "true",
+        "options" :
+            [
+                {
+                    "attribute": "Prof",
+                    "name" : "Professor",
+                    "nextQuestion" : ""
+                },
+                {
+                    "attribute": "Dr",
+                    "name" : "Doctor",
+                    "nextQuestion" : ""
+                },
+                {
+                    "attribute": "Mr",
+                    "name" : "Mister",
+                    "nextQuestion" : ""
+                },
+                {
+                    "attribute": "Mrs",
+                    "name" : "Mrssr",
+                    "nextQuestion" : ""
+                },
+                {
+                    "attribute": "Miss",
+                    "name" : "Miss",
+                    "nextQuestion" : ""
+                },
+                {
+                    "attribute": "Rev",
+                    "name" : "Reverend",
+                    "nextQuestion" : ""
+                }
+            ]
+    },
+
+    "Question2" : 
+    {
+        "type" : "text",
+        "question" : "First Name",
+        "nextQuestion" : "Question3"
+    },
+    "Question3" : 
+    {
+        "type" : "text",
+        "question" : "Middle Name",
+        "nextQuestion" : "Question4"
+    },
+
+    "Question4" : 
+    {
+        "type" : "text",
+        "question" : "Last Name",
+        "nextQuestion" : "Question5"
+    },
+
+    "Question5" : 
+    {
+        "type" : "date",
+        "question" : "Date of birth",
+        "nextQuestion" : "Question6"
+    },
+    "Question6" : 
+    {
+        "type" : "date",
+        "question" : "Date of compulsory retirement",
+        "nextQuestion" : "Question7"
+    }
+}
